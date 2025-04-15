@@ -15,13 +15,31 @@ function extractTextContent(doc) {
   return firstHundredWords + (words.length > 100 ? '...' : '');
 }
 
+// Function to get total word count
+function extractWordCount(doc) {
+  // Get all text nodes from the body
+  const bodyText = doc.body.innerText || doc.body.textContent || '';
+  
+  // Limit to first 100 words
+  const words = bodyText.split(/\s+/);
+  
+  return words.length; // Return total word count
+}
+
+// Function to get the reading time estimate
+function getReadingTime(doc) {
+  return extractWordCount(doc) / 150; // Average reading speed is 150 words per minute
+}
+
 // Function to clip the current page
 function clipCurrentPage() {
   const pageData = {
     title: document.title,
     url: window.location.href,
     timestamp: new Date().toISOString(),
-    content: extractTextContent(document)
+    content: extractTextContent(document),
+    wordCount: extractWordCount(document),
+    readingTime: getReadingTime(document).toFixed(2),
   };
   
   // Send the data to the background script

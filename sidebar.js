@@ -48,6 +48,7 @@ async function renderClippedPages() {
         <div class="clip-title">${page.title}</div>
         <a href="${page.url}" class="clip-url" target="_blank">${page.url}</a>
         <div class="clip-date">${formatDate(page.timestamp)}</div>
+        <div class="clip-content">Word count: ${page.wordCount} (Estimated reading time: ${page.readingTime} minutes)</div>
         <div class="clip-content">${page.content}</div>
         <button class="delete-btn" data-id="${page.id}">×</button>
       `;
